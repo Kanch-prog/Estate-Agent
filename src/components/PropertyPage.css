@@ -1,0 +1,39 @@
+.property-page {
+    margin: 20px;
+  }
+  
+  .gallery {
+    margin-top: 20px;
+  }
+  
+  .property-info {
+    margin-top: 20px;
+  }
+  
+  .property-info p {
+    margin: 10px 0;
+  }
+  
+  .react-tabs__tab-list {
+    margin-top: 20px;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .react-tabs__tab {
+    margin-right: 10px;
+    cursor: pointer;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+  }
+  
+  .react-tabs__tab--selected {
+    background-color: #00deb6;
+    color: white;
+  }
+  
+  .react-tabs__tab-panel {
+    margin-top: 20px;
+  }
+  
