@@ -9,6 +9,7 @@ import PropertyList from './components/PropertyList';
 import FavoritesList from './components/FavoritesList';
 import AdvancedSearchForm from './components/AdvancedSearchForm';
 import SearchForm from './components/SearchForm';
+import Footer from './components/Footer';
 import './App.css';
 import propertyData from './propertyData';
 
@@ -67,7 +68,6 @@ const App = () => {
   };
 
   const removeFromFavorites = (propertyToRemove) => {
-    // Remove the property from favorites
     setFavorites((prevFavorites) =>
       prevFavorites.filter((property) => property.id !== propertyToRemove.id)
     );
@@ -108,6 +108,7 @@ const App = () => {
                         addToFavorites={handleAddToFavorites} 
                       />
                     </div>
+                    <Footer />
                   </>
                 )}
               </div>

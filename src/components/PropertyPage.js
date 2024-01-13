@@ -30,12 +30,12 @@ const resizedImages = images.map((img) => ({
 
   return (
     <div className="property-page">
-      <h2>{property.type}</h2>
+      <h2>{property.location}</h2>
 
       <ImageGallery items={resizedImages} className='gallery' />
 
       <div className="property-info">
-        <p>{property.location}</p>
+        <p>{property.type}</p>
         <p>Price: {property.price}</p>
       </div>
 
@@ -50,10 +50,18 @@ const resizedImages = images.map((img) => ({
           <p>{property.description}</p>
         </TabPanel>
         <TabPanel>
-          <p>Display floor plan here</p>
+          <ImageGallery items={[{ original: process.env.PUBLIC_URL + '/' + property.floorPlanImage }]} />
         </TabPanel>
         <TabPanel>
-          <p>Display Google Map here</p>
+        <iframe
+          width="600"
+          height="450"
+          frameBorder="0"
+          style={{ border: 0 }}
+          src={`https://www.google.com/maps/embed/v1/place?q=${encodeURIComponent(property.location)}`}
+          allowFullScreen
+          title="Google Map"
+        ></iframe>
         </TabPanel>
       </Tabs>
     </div>

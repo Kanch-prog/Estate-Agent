@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDrag } from 'react-dnd';
 
-const PropertyCard = ({ property, addToFavorites, isInFavoritesList }) => {
+const PropertyCard = ({ property, addToFavorites, isInFavoritesList, removeFromFavorites }) => {
   const [isInFavorites, setIsInFavorites] = useState(isInFavoritesList);
   const navigate = useNavigate();
 
@@ -19,12 +19,23 @@ const PropertyCard = ({ property, addToFavorites, isInFavoritesList }) => {
   });
 
   const handleFavoriteButton = () => {
-    if (addToFavorites) {
-      addToFavorites(property);
+    if (isInFavorites && removeFromFavorites) {
+      // If removeFromFavorites is provided and property is in favorites, remove it
+      removeFromFavorites(property);
+  
+      // Update the local state to reflect the removal
+      setIsInFavorites(false);
     } else {
+      // Otherwise, toggle the isInFavorites state
       setIsInFavorites(!isInFavorites);
+  
+      // If addToFavorites is provided and property is not in favorites, add it
+      if (!isInFavorites && addToFavorites) {
+        addToFavorites(property);
+      }
     }
   };
+  
 
   return (
     <div className={`property-card ${isDragging ? 'dragging' : ''}`} ref={drag}>
@@ -35,10 +46,10 @@ const PropertyCard = ({ property, addToFavorites, isInFavoritesList }) => {
           <p>{property.location}</p>
           <p>Price: {property.price}</p>
 
-          {!isInFavoritesList && (
-            <button onClick={handleFavoriteButton}>
-              {isInFavorites ? 'Remove from Favorites' : 'Add to Favorites'}
-            </button>
+          {isInFavorites ? (
+            <button onClick={handleFavoriteButton}>Remove from Favorites</button>
+          ) : (
+            <button onClick={handleFavoriteButton}>Add to Favorites</button>
           )}
 
         </div>

@@ -27,7 +27,6 @@ const FavoritesList = ({ favorites, removeFromFavorites, propertyData, addToFavo
                 addToFavorites={addToFavorites}
                 isInFavoritesList={true}
               />
-              <button onClick={() => removeFromFavorites(property)}>Remove from Favorites</button>
             </div>
           );
         })
