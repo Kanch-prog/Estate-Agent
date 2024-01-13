@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import Autocomplete from '@mui/material/Autocomplete';
 
-const propertyTypes = ['House', 'Flat', 'Any'];
-
+// state  to manage the form input for advanced search
 const AdvancedSearchForm = ({ onAdvancedSearch }) => {
   const [advancedSearch, setAdvancedSearch] = useState({
     type: '',
@@ -15,25 +13,39 @@ const AdvancedSearchForm = ({ onAdvancedSearch }) => {
     postcodeArea: '',
   });
 
+  // function to handle input changes in the form field
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setAdvancedSearch({ ...advancedSearch, [name]: value });
+    setAdvancedSearch((prevCriteria) => ({
+      ...prevCriteria,
+      [name]: value,
+    }));
   };
 
+  // function to handle the form submission and trigger the advance search
   const handleSearch = (e) => {
     e.preventDefault();
+    // advancedSearch callback with the current state
     onAdvancedSearch(advancedSearch);
   };
 
   return (
+    // call handleSearch function on submission
     <form onSubmit={handleSearch} className="advanced-search-form">
-      <Autocomplete
-        options={propertyTypes}
-        renderInput={(params) => <TextField {...params} label="Type" variant="outlined" />}
-        value={advancedSearch.type}
-        onChange={(e, value) => setAdvancedSearch({ ...advancedSearch, type: value })}
-      />
 
+      {/* Text field for entering property type */}
+      <TextField
+          label="Property Type"
+          type="text"
+          name="type"
+          value={advancedSearch.type}
+          onChange={handleInputChange}
+          variant="outlined"
+          fullWidth
+          margin="normal"
+        />
+
+      {/* Text field for entering minimum price */}
       <TextField
         label="Min Price"
         variant="outlined"
@@ -42,7 +54,7 @@ const AdvancedSearchForm = ({ onAdvancedSearch }) => {
         value={advancedSearch.minPrice}
         onChange={handleInputChange}
       />
-
+      {/* Text field for entering maximum price */}
       <TextField
         label="Max Price"
         variant="outlined"
@@ -52,6 +64,7 @@ const AdvancedSearchForm = ({ onAdvancedSearch }) => {
         onChange={handleInputChange}
       />
 
+      {/* Text field for entering minimum bedrooms */}
       <TextField
         label="Min Bedrooms"
         variant="outlined"
@@ -61,6 +74,7 @@ const AdvancedSearchForm = ({ onAdvancedSearch }) => {
         onChange={handleInputChange}
       />
 
+      {/* Text field for entering maximum price */}
       <TextField
         label="Max Bedrooms"
         variant="outlined"
@@ -70,6 +84,17 @@ const AdvancedSearchForm = ({ onAdvancedSearch }) => {
         onChange={handleInputChange}
       />
 
+      {/* Text field for entering postalcode area */}
+      <TextField
+        label="Postalcode Area"
+        variant="outlined"
+        type="text"
+        name="postcodeArea"
+        value={advancedSearch.postcodeArea}
+        onChange={handleInputChange}
+      />
+
+       {/* triggers the handleSearch */}
       <Button variant="contained" type="submit" onClick={handleSearch}>
         Search
       </Button>

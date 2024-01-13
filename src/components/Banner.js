@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Banner = ({ onSearch, onInputChange, searchMethod }) => {
+const Banner = () => {
   return (
     <div className="banner">
       <img src="images/hero_image.jpg" alt="hero" />
